@@ -12,10 +12,12 @@ interface PageHeadingProps {
 const PageHeading: FunctionComponent<PageHeadingProps> = ({ title, lead }) => (
   <Box py="50px" borderBottom="1px" borderColor="gray.300">
     <Wrapper>
-      <Stack spacing={6}>
-        <PageTitle>{title}</PageTitle>
-        {lead && <PageLead>{lead}</PageLead>}
-      </Stack>
+      <Box>
+        <Stack spacing={6}>
+          <PageTitle>{title}</PageTitle>
+          {lead && <PageLead>{lead}</PageLead>}
+        </Stack>
+      </Box>
     </Wrapper>
   </Box>
 );
