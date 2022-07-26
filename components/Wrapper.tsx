@@ -3,13 +3,16 @@ import { Box } from "@chakra-ui/react";
 
 interface WrapperProps {
   children: ReactNode;
+  fullWidth?: Boolean;
 }
 
-const Wrapper: FunctionComponent<WrapperProps> = ({ children }) => (
+const Wrapper: FunctionComponent<WrapperProps> = ({ children, fullWidth }) => (
   <Box
     width="100%"
-    maxWidth={["640px", "768px", "1024px", "1280px", "1536px"]}
-    px={["10px", "10px", "20px"]}
+    maxWidth={
+      fullWidth ? "100%" : ["640px", "768px", "1024px", "1280px", "1536px"]
+    }
+    px={["20px", "20px", "20px", "30px"]}
     mx="auto"
   >
     {children}

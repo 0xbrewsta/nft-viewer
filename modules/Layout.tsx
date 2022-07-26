@@ -1,7 +1,7 @@
 import type { FunctionComponent, ReactNode } from "react";
+import { Box } from "@chakra-ui/react";
 import { Header } from "../modules/Header";
 import { Footer } from "../modules/Footer";
-import { Wrapper } from "../components/Wrapper";
 
 interface LayoutProps {
   children: ReactNode;
@@ -10,9 +10,9 @@ interface LayoutProps {
 const Layout: FunctionComponent<LayoutProps> = ({ children }) => (
   <div>
     <Header />
-    <main>
-      <Wrapper>{children}</Wrapper>
-    </main>
+    <Box as="main" py="20px">
+      {children}
+    </Box>
     <Footer />
   </div>
 );
