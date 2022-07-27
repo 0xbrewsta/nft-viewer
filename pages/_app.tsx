@@ -23,7 +23,7 @@ const { chains, provider, webSocketProvider } = configureChains(defaultChains, [
 ]);
 
 const web3Client = createClient({
-  autoConnect: true,
+  autoConnect: false,
   connectors: [
     new MetaMaskConnector({ chains }),
     new WalletConnectConnector({
