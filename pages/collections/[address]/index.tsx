@@ -1,5 +1,4 @@
 import type { NextPage, GetServerSideProps } from "next";
-import NextLink from "next/link";
 import { Box, Text, List, ListItem, Link, Stack } from "@chakra-ui/react";
 import { Seo } from "../../../components/Seo";
 import { PageHeading } from "../../../components/PageHeading";
