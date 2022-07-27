@@ -1,5 +1,4 @@
 import { NextResponse, NextRequest } from "next/server";
-import { GRAPHQL_API_ENDPOINT, PROXY_GRAPHQL_API_ENDPOINT } from "./constants";
 
 export const middleware = (request: NextRequest) => {
     const { pathname } = request.nextUrl;
@@ -12,12 +11,6 @@ export const middleware = (request: NextRequest) => {
     collectionsUrl.pathname = "/collections";
 
     return NextResponse.redirect(collectionsUrl);
-  }
-
-  // If API
-  if(request.nextUrl.pathname === PROXY_GRAPHQL_API_ENDPOINT) {
-    // Proxy to LooksRareAPI
-    return NextResponse.redirect(GRAPHQL_API_ENDPOINT);
   }
 
   return NextResponse.next();
