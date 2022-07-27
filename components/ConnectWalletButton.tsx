@@ -1,17 +1,15 @@
 import type { FunctionComponent } from "react";
 import { useState } from "react";
-import { useAccount, useConnect, useDisconnect, useEnsName } from "wagmi";
-import { Button, Flex, Box } from "@chakra-ui/react";
+import { useAccount, useDisconnect, useEnsName } from "wagmi";
+import { Button, Flex, Box, Spinner } from "@chakra-ui/react";
 import { ConnectWalletModal } from "./ConnectWalletModal";
 import { getShortAddress } from "../utils";
 
 interface ConnectWalletButtonProps {}
 
 const ConnectWalletButton: FunctionComponent<ConnectWalletButtonProps> = () => {
-  const { address, connector, isConnected } = useAccount();
+  const { address, isConnected } = useAccount();
   const { data: ensName } = useEnsName({ address });
-  const { connect, connectors, error, isLoading, pendingConnector } =
-    useConnect();
   const { disconnect } = useDisconnect();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -23,7 +21,14 @@ const ConnectWalletButton: FunctionComponent<ConnectWalletButtonProps> = () => {
         <Box pr="10px" fontSize={["sm", "sm", "md"]}>
           {ensName ? ensName : getShortAddress(address)}
         </Box>
-        <Button onClick={disconnect}>Disconnect</Button>
+        <Button
+          onClick={() => {
+            disconnect();
+            setModalIsOpen(false);
+          }}
+        >
+          Disconnect
+        </Button>
       </Flex>
     );
   }
@@ -36,6 +41,7 @@ const ConnectWalletButton: FunctionComponent<ConnectWalletButtonProps> = () => {
         color="white"
       >
         Connect
+        {modalIsOpen && <Spinner size="sm" ml="10px" color="white" />}
       </Button>
       <ConnectWalletModal
         isOpen={modalIsOpen}
