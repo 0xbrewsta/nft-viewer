@@ -11,9 +11,9 @@ const Header: FunctionComponent<HeaderProps> = () => (
     <Wrapper fullWidth>
       <Flex alignItems="center" justify="space-between">
         <NextLink href="/" passHref>
-          <Link>
-            <Text fontSize="lg" textTransform="uppercase">
-              NFT Viewer
+          <Link _hover={{ textDecoration: "none" }}>
+            <Text fontSize="lg" textTransform="uppercase" fontWeight="medium">
+              👀💎 NFT Viewer
             </Text>
           </Link>
         </NextLink>

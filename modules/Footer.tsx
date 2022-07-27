@@ -14,7 +14,17 @@ const Footer: FunctionComponent<FooterProps> = () => (
   >
     <Wrapper fullWidth>
       <Flex justify="space-between">
-        <Text>&copy; {new Date().getFullYear()} NFT Viewer</Text>
+        <Text>
+          &copy; {new Date().getFullYear()} NFT Viewer by{" "}
+          <Link
+            href="https://github.com/0xbrewsta"
+            isExternal
+            target="_blank"
+            color="green.500"
+          >
+            Brewsta
+          </Link>
+        </Text>
         <Text>
           Token data from{" "}
           <Link href="https://looksrare.org" target="_blank" color="green.500">
