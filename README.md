@@ -2,6 +2,8 @@
 
 This repository contains the code base for a simple NFT viewing app that leverages [LooksRare](https://looksrare.org/)'s GraphQL API.
 
+![NFT Viewer](screenshot.png "NFT Viewer")
+
 ## Getting Started
 
 1. Install the app's dependencies:
@@ -18,6 +20,6 @@ yarn dev
 
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the app in action
 
-## Command Index
-
 ## Live App
+
+This app is also deployed to [Vercel](https://nft-viewer-blond.vercel.app/) for ease of viewing.
