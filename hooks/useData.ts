@@ -10,7 +10,7 @@ const client = new GraphQLClient(
   });
 
 const useGetToken = (collection: string, tokenId: string) => useQuery(["token-owners", collection, tokenId], async () => {
-    const tokenOwner = await client.request(gql`
+  const tokenOwner = await client.request(gql`
     query GetToken(
         $collection: Address!
         $tokenId: String!
