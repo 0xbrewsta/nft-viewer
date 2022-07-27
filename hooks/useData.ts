@@ -1,13 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { GraphQLClient, gql } from "graphql-request";
-import { GRAPHQL_API_ENDPOINT, LOOKS_RARE_API_KEY } from "../constants";
+import { GRAPHQL_API_ENDPOINT } from "../constants";
 
-const client = new GraphQLClient(
-  GRAPHQL_API_ENDPOINT, {
-    headers: {
-      Authorization: `Bearer ${LOOKS_RARE_API_KEY}`
-    },
-  });
+const client = new GraphQLClient(GRAPHQL_API_ENDPOINT);
 
 const useGetToken = (collection: string, tokenId: string) => useQuery(["token-owners", collection, tokenId], async () => {
   const tokenOwner = await client.request(gql`
