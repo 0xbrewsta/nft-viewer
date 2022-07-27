@@ -9,12 +9,14 @@ import {
   SimpleGrid,
   Text,
   Center,
+  Link,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import { Seo } from "../../../components/Seo";
 import { PageHeading } from "../../../components/PageHeading";
 import { Wrapper } from "../../../components/Wrapper";
 import { useGetToken } from "../../../hooks/useData";
+import { getShortAddress } from "../../../utils";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
@@ -41,6 +43,10 @@ type Attribute = {
 
 const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
   const { data } = useGetToken(address, tokenId);
+  const ownerAddress = data?.token?.owners[0]?.owner?.address;
+  const isOwnedByConnectedWallet = ownerAddress === address;
+
+  console.log(address, ownerAddress, isOwnedByConnectedWallet);
 
   return (
     <>
@@ -100,30 +106,64 @@ const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
               pl={["0", "0", "0", "40px"]}
               pt={["40px", "40px", "40px", "0"]}
             >
-              <Stack spacing={4}>
-                <Text fontSize="sm" color="gray.600" textTransform="uppercase">
-                  Attributes
-                </Text>
-                <SimpleGrid columns={[2, 3, 4, 3, 4]} spacing={3}>
-                  {data?.token?.attributes?.map((attribute: Attribute) => (
-                    <Box
-                      key={attribute?.id}
-                      fontWeight="medium"
-                      bg="gray.100"
-                      justifyItems="center"
-                      alignItems="center"
-                      rounded="md"
-                      p="10px"
-                    >
-                      <Text color="green.500" fontSize="sm">
-                        {attribute?.traitType}
-                      </Text>
-                      <Text fontSize="sm" color="gray.600">
-                        {attribute?.value}
-                      </Text>
-                    </Box>
-                  ))}
-                </SimpleGrid>
+              <Stack spacing={6}>
+                <Stack spacing={1}>
+                  <Text
+                    fontSize="sm"
+                    color="gray.600"
+                    textTransform="uppercase"
+                  >
+                    Owner
+                  </Text>
+                  <Text fontWeight="bold" color="green.500">
+                    {isOwnedByConnectedWallet ? (
+                      <Link
+                        href={`https://etherscan.io/address/${address}`}
+                        isExternal
+                        target="_blank"
+                      >
+                        You
+                      </Link>
+                    ) : (
+                      <Link
+                        href={`https://etherscan.io/address/${ownerAddress}`}
+                        isExternal
+                        target="_blank"
+                      >
+                        {getShortAddress(ownerAddress)}
+                      </Link>
+                    )}
+                  </Text>
+                </Stack>
+                <Stack spacing={2}>
+                  <Text
+                    fontSize="sm"
+                    color="gray.600"
+                    textTransform="uppercase"
+                  >
+                    Attributes
+                  </Text>
+                  <SimpleGrid columns={[2, 3, 4, 3, 4]} spacing={3}>
+                    {data?.token?.attributes?.map((attribute: Attribute) => (
+                      <Box
+                        key={attribute?.id}
+                        fontWeight="medium"
+                        bg="gray.100"
+                        justifyItems="center"
+                        alignItems="center"
+                        rounded="md"
+                        p="10px"
+                      >
+                        <Text color="green.500" fontSize="sm">
+                          {attribute?.traitType}
+                        </Text>
+                        <Text fontSize="sm" color="gray.600">
+                          {attribute?.value}
+                        </Text>
+                      </Box>
+                    ))}
+                  </SimpleGrid>
+                </Stack>
               </Stack>
             </Box>
           </Flex>
