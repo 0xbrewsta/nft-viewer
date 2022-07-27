@@ -1,6 +1,7 @@
 import type { NextPage, GetServerSideProps } from "next";
 import Image from "next/image";
 import NextLink from "next/link";
+import { useAccount } from "wagmi";
 import {
   Box,
   Flex,
@@ -44,9 +45,8 @@ type Attribute = {
 const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
   const { data } = useGetToken(address, tokenId);
   const ownerAddress = data?.token?.owners[0]?.owner?.address;
-  const isOwnedByConnectedWallet = ownerAddress === address;
-
-  console.log(data?.token);
+  const { address: connectedAddress } = useAccount();
+  const isOwnedByConnectedWallet = ownerAddress === connectedAddress;
 
   const pageHeading =
     data?.token?.collection?.name && data?.token?.tokenId
@@ -162,11 +162,11 @@ const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
                   <Text fontWeight="bold" color="green.500">
                     {isOwnedByConnectedWallet ? (
                       <Link
-                        href={`https://etherscan.io/address/${address}`}
+                        href={`https://etherscan.io/address/${connectedAddress}`}
                         isExternal
                         target="_blank"
                       >
-                        You
+                        You!
                       </Link>
                     ) : (
                       <Link

@@ -38,8 +38,7 @@ const ConnectWalletModal: FunctionComponent<ConnectWalletModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const { connect, connectors, error, isLoading, pendingConnector } =
-    useConnect();
+  const { connect, connectors, isLoading, pendingConnector } = useConnect();
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
