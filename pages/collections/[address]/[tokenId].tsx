@@ -24,8 +24,7 @@ interface TokenIdPageProps {
 }
 
 const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
-  const { isLoading, error, data } = useGetToken(address, tokenId);
-  console.log(data?.token);
+  const { data } = useGetToken(address, tokenId);
 
   return (
     <>
@@ -42,12 +41,17 @@ const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
                 h={["300px", "400px", "500px"]}
                 w={["300px", "400px", "500px"]}
                 position="relative"
+                bg="gray.100"
               >
-                <Image
-                  src={data?.token?.image?.src}
-                  alt={data?.token?.name}
-                  layout="fill"
-                />
+                {data?.token?.image?.src && (
+                  <Image
+                    src={data?.token?.image?.src}
+                    alt={data?.token?.name}
+                    height={500}
+                    width={500}
+                    priority
+                  />
+                )}
               </Box>
               <Flex justify="space-between">
                 {parseInt(tokenId) > 0 && (

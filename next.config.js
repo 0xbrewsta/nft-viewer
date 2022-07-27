@@ -4,6 +4,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: ['static.looksnice.org'],
+    minimumCacheTTL: 31536000,
   },
 }
 

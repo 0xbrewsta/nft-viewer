@@ -10,7 +10,7 @@ interface PageHeadingProps {
 }
 
 const PageHeading: FunctionComponent<PageHeadingProps> = ({ title, lead }) => (
-  <Box py="50px" borderBottom="1px" borderColor="gray.300">
+  <Box py="50px" borderBottom="1px" borderColor="gray.300" minHeight="240">
     <Wrapper>
       <Box>
         <Stack spacing={6}>
