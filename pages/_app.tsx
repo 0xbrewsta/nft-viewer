@@ -9,7 +9,6 @@ import {
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
-import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -36,14 +35,6 @@ const web3Client = createClient({
       chains,
       options: {
         appName: "NFT Viewer",
-      },
-    }),
-
-    new InjectedConnector({
-      chains,
-      options: {
-        name: "Injected",
-        shimDisconnect: true,
       },
     }),
   ],
