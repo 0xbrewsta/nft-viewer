@@ -27,6 +27,13 @@ const useGetToken = (collection: string, tokenId: string) => useQuery(["token-ow
                 }
                 balance
             }
+            collection {
+              name
+              totalSupply
+              floor {
+                floorPrice
+              }
+            }
         }
       }
       

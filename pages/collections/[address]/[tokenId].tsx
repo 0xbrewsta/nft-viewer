@@ -46,13 +46,20 @@ const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
   const ownerAddress = data?.token?.owners[0]?.owner?.address;
   const isOwnedByConnectedWallet = ownerAddress === address;
 
+  console.log(data?.token);
+
+  const pageHeading =
+    data?.token?.collection?.name && data?.token?.tokenId
+      ? `${data?.token?.collection?.name} #${data?.token?.tokenId}`
+      : "";
+
   return (
     <>
       <Seo
         title={`${data?.token?.name} | NFT Viewer`}
         description="NFT viewing app that leverages LooksRare's GraphQL API"
       />
-      <PageHeading title={data?.token?.name} lead={data?.token?.description} />
+      <PageHeading title={pageHeading} lead={data?.token?.description} />
       <Wrapper>
         <Box py="30px">
           <Flex flexDirection={["column", "column", "column", "row"]}>
@@ -88,16 +95,19 @@ const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
                     </NextLink>
                   </Box>
                 )}
-                <Box ml="auto">
-                  <NextLink
-                    href={`/collections/${address}/${parseInt(tokenId) + 1}`}
-                    passHref
-                  >
-                    <Button as="a" rightIcon={<ArrowForwardIcon />}>
-                      Next token
-                    </Button>
-                  </NextLink>
-                </Box>
+                {parseInt(tokenId) !==
+                  parseInt(data?.token?.collection?.totalSupply) - 1 && (
+                  <Box ml="auto">
+                    <NextLink
+                      href={`/collections/${address}/${parseInt(tokenId) + 1}`}
+                      passHref
+                    >
+                      <Button as="a" rightIcon={<ArrowForwardIcon />}>
+                        Next token
+                      </Button>
+                    </NextLink>
+                  </Box>
+                )}
               </Flex>
             </Stack>
             <Box
@@ -105,6 +115,42 @@ const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
               pt={["40px", "40px", "40px", "0"]}
             >
               <Stack spacing={6}>
+                <Stack spacing={1}>
+                  <Text
+                    fontSize="sm"
+                    color="gray.600"
+                    textTransform="uppercase"
+                  >
+                    Name
+                  </Text>
+                  <Text fontWeight="bold" color="green.500">
+                    {data?.token?.name}
+                  </Text>
+                </Stack>
+                <Stack spacing={1}>
+                  <Text
+                    fontSize="sm"
+                    color="gray.600"
+                    textTransform="uppercase"
+                  >
+                    Collection
+                  </Text>
+                  <Text fontWeight="bold" color="green.500">
+                    {data?.token?.collection?.name}
+                  </Text>
+                </Stack>
+                <Stack spacing={1}>
+                  <Text
+                    fontSize="sm"
+                    color="gray.600"
+                    textTransform="uppercase"
+                  >
+                    Token ID
+                  </Text>
+                  <Text fontWeight="bold" color="green.500">
+                    {data?.token?.tokenId}
+                  </Text>
+                </Stack>
                 <Stack spacing={1}>
                   <Text
                     fontSize="sm"
