@@ -46,8 +46,6 @@ const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
   const ownerAddress = data?.token?.owners[0]?.owner?.address;
   const isOwnedByConnectedWallet = ownerAddress === address;
 
-  console.log(address, ownerAddress, isOwnedByConnectedWallet);
-
   return (
     <>
       <Seo
