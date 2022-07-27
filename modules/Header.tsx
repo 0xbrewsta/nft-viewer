@@ -2,7 +2,7 @@ import type { FunctionComponent } from "react";
 import NextLink from "next/link";
 import { Box, Text, Flex, Link } from "@chakra-ui/react";
 import { Wrapper } from "../components/Wrapper";
-import { ConnectButton } from "../components/ConnectButton";
+import { ConnectWalletButton } from "../components/ConnectWalletButton";
 
 interface HeaderProps {}
 
@@ -17,7 +17,7 @@ const Header: FunctionComponent<HeaderProps> = () => (
             </Text>
           </Link>
         </NextLink>
-        <ConnectButton />
+        <ConnectWalletButton />
       </Flex>
     </Wrapper>
   </Box>

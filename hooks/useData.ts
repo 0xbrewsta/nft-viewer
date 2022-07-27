@@ -23,4 +23,8 @@ const useGetToken = (collection: string, tokenId: string) => useQuery(["token", 
     return token;
 });
 
+// @TODO Use ethers to make a contract call to check connected addresses token balance/IDs
+// @TODO OR use "GetTokenOwners from LooksRare GraphQL"
+const useCheckOwner = () => {};
+
 export { useGetToken };

@@ -23,6 +23,7 @@ interface TokenIdPageProps {
 
 const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
   const { isLoading, error, data } = useGetToken(address, tokenId);
+  console.log(data?.token);
 
   return (
     <>
