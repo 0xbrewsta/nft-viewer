@@ -1,5 +1,5 @@
 import type { FunctionComponent, ReactNode } from "react";
-import { Heading } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 
 interface PageTitleProps {
   children: ReactNode;
@@ -7,7 +7,7 @@ interface PageTitleProps {
 
 const PageTitle: FunctionComponent<PageTitleProps> = ({ children }) => (
   <Heading as="h1" size="3xl">
-    {children}
+    <Text noOfLines={[1, 1, 2, 3]}>{children}</Text>
   </Heading>
 );
 

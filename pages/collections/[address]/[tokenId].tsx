@@ -1,7 +1,15 @@
 import type { NextPage, GetServerSideProps } from "next";
 import Image from "next/image";
 import NextLink from "next/link";
-import { Box, Flex, Button, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Button,
+  Stack,
+  SimpleGrid,
+  Text,
+  Center,
+} from "@chakra-ui/react";
 import { ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import { Seo } from "../../../components/Seo";
 import { PageHeading } from "../../../components/PageHeading";
@@ -23,6 +31,14 @@ interface TokenIdPageProps {
   token: object;
 }
 
+type Attribute = {
+  id: string;
+  traitType: string;
+  value: string;
+  displayType: string;
+  count: string;
+};
+
 const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
   const { data } = useGetToken(address, tokenId);
 
@@ -35,22 +51,24 @@ const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
       <PageHeading title={data?.token?.name} lead={data?.token?.description} />
       <Wrapper>
         <Box py="30px">
-          <Flex>
+          <Flex flexDirection={["column", "column", "column", "row"]}>
             <Stack spacing={6}>
               <Box
-                h={["300px", "400px", "500px"]}
-                w={["300px", "400px", "500px"]}
                 position="relative"
                 bg="gray.100"
+                minHeight={["300px", "400px", "500px"]}
+                minWidth={["300px", "400px", "500px"]}
               >
                 {data?.token?.image?.src && (
-                  <Image
-                    src={data?.token?.image?.src}
-                    alt={data?.token?.name}
-                    height={500}
-                    width={500}
-                    priority
-                  />
+                  <Center>
+                    <Image
+                      src={data?.token?.image?.src}
+                      alt={data?.token?.name}
+                      height={500}
+                      width={500}
+                      priority
+                    />
+                  </Center>
                 )}
               </Box>
               <Flex justify="space-between">
@@ -78,6 +96,36 @@ const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
                 </Box>
               </Flex>
             </Stack>
+            <Box
+              pl={["0", "0", "0", "40px"]}
+              pt={["40px", "40px", "40px", "0"]}
+            >
+              <Stack spacing={4}>
+                <Text fontSize="sm" color="gray.600" textTransform="uppercase">
+                  Attributes
+                </Text>
+                <SimpleGrid columns={[2, 3, 4, 3, 4]} spacing={3}>
+                  {data?.token?.attributes?.map((attribute: Attribute) => (
+                    <Box
+                      key={attribute?.id}
+                      fontWeight="medium"
+                      bg="gray.100"
+                      justifyItems="center"
+                      alignItems="center"
+                      rounded="md"
+                      p="10px"
+                    >
+                      <Text color="green.500" fontSize="sm">
+                        {attribute?.traitType}
+                      </Text>
+                      <Text fontSize="sm" color="gray.600">
+                        {attribute?.value}
+                      </Text>
+                    </Box>
+                  ))}
+                </SimpleGrid>
+              </Stack>
+            </Box>
           </Flex>
         </Box>
       </Wrapper>
