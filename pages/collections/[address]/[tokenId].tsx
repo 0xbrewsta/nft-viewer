@@ -43,7 +43,7 @@ type Attribute = {
 };
 
 const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
-  const { data } = useGetToken(address, tokenId);
+  const { data, isLoading } = useGetToken(address, tokenId);
   const ownerAddress = data?.token?.owners[0]?.owner?.address;
   const { address: connectedAddress } = useAccount();
   const isOwnedByConnectedWallet = ownerAddress === connectedAddress;
@@ -160,7 +160,7 @@ const TokenId: NextPage<TokenIdPageProps> = ({ address, tokenId }) => {
                     Owner
                   </Text>
                   <Text fontWeight="bold" color="green.500">
-                    {isOwnedByConnectedWallet ? (
+                    {!isLoading && isOwnedByConnectedWallet ? (
                       <Link
                         href={`https://etherscan.io/address/${connectedAddress}`}
                         isExternal
