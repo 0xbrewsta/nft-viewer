@@ -8,6 +8,7 @@ const Footer: FunctionComponent<FooterProps> = () => (
   <Box
     as="footer"
     pt="120px"
+    pb="40px"
     borderTop="1px"
     borderColor="gray.300"
     fontSize="sm"
