@@ -1,6 +1,6 @@
 import type { FunctionComponent } from "react";
 import NextLink from "next/link";
-import { Box, Link } from "@chakra-ui/react";
+import { Flex, Link, Text } from "@chakra-ui/react";
 
 interface TokenProps {
   address: string;
@@ -8,11 +8,23 @@ interface TokenProps {
 }
 
 const Token: FunctionComponent<TokenProps> = ({ address, id }) => (
-  <Box bg="gray.100" p={["10px", "20px"]} rounded="5px" h="160px">
-    <NextLink href={`/collections/${address}/${id}`} passHref>
-      <Link color="green.500">{id}</Link>
-    </NextLink>
-  </Box>
+  <NextLink href={`/collections/${address}/${id}`} passHref>
+    <Link color="green.500" _hover={{ textDecoration: "none" }}>
+      <Flex
+        justify="center"
+        align="center"
+        bg="gray.100"
+        _hover={{ bg: "gray.200" }}
+        p={["10px", "20px"]}
+        rounded="5px"
+        h="160px"
+      >
+        <Text fontSize="lg" fontWeight="bold">
+          {id}
+        </Text>
+      </Flex>
+    </Link>
+  </NextLink>
 );
 
 export { Token };
